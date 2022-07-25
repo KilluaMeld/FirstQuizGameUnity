@@ -7,13 +7,15 @@ public class StartQuestion : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _question;
     [SerializeField] private QuiestionList1 _ql;
     [SerializeField] private List<AnswerOnButton> _answersButton;
+
+    private QuiestionList1 li1 = new QuiestionList1 (); 
     private void Start()
     {
         TakeAndSetQuestion();
     }
     void TakeAndSetQuestion()
     {
-        var l = _ql.SendQuestion();
+        var l = li1.SendQuestion();
         SetQuestion(l.quest);
         SetAnswers(l.answers);
     }
