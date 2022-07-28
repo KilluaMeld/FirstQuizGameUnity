@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 6829a05407f55d74d9bac8e88d3921d8
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Attack Of Monster
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 06a79d0edabb7e54cbfac7e206998d8a, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
