@@ -1,11 +1,13 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using System.IO;
 
 public class StartQuestion : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _question;
-    [SerializeField] private QuiestionList1 _ql;
+    //[SerializeField] private QuiestionList1 _ql;
     [SerializeField] private List<AnswerOnButton> _answersButton;
 
     private QuiestionList1 li1 = new QuiestionList1 (); 
@@ -13,11 +15,13 @@ public class StartQuestion : MonoBehaviour
     {
         TakeAndSetQuestion();
     }
+    [SerializeField] QuestionInJsonList _ql = new QuestionInJsonList();
     void TakeAndSetQuestion()
     {
-        var l = li1.SendQuestion();
-        SetQuestion(l.quest);
-        SetAnswers(l.answers);
+        _ql = JsonUtility.FromJson<QuestionInJsonList>(File.ReadAllText(Application.streamingAssetsPath + "/QuestionsList.json"));
+        //var l = li1.SendQuestion();
+        SetQuestion(_ql.QuestionList22[0].Question);
+        SetAnswers(new List<string>{ _ql.QuestionList22[0].answer1, _ql.QuestionList22[0].answer2, _ql.QuestionList22[0].answer3, _ql.QuestionList22[0].answer4, });
     }
     void SetQuestion(string text)
     {
@@ -40,4 +44,20 @@ public class StartQuestion : MonoBehaviour
         }
     }
 
+}
+
+[System.Serializable]
+class QuestionInJson
+{
+    public string Question;
+    public string answer1;
+    public string answer2;
+    public string answer3;
+    public string answer4;
+}
+
+[System.Serializable]
+class QuestionInJsonList
+{
+    public List<QuestionInJson> QuestionList22;
 }
