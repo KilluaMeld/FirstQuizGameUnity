@@ -9,15 +9,20 @@ public class StartQuestion : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _question;
     [SerializeField] private List<AnswerOnButton> _answersButton;
     [SerializeField] QuestionInJsonList _ql = new QuestionInJsonList();
+
     private void Start()
     {
-        TakeAndSetQuestion();
     }
-    void TakeAndSetQuestion()
+    public void TakeQuizList(string pathOnQuizList)
     {
-        _ql = JsonUtility.FromJson<QuestionInJsonList>(File.ReadAllText(Application.streamingAssetsPath + "/QuestionsList.json"));
-        SetQuestion(_ql.QuestionListCommon[0].Question);
-        SetAnswers(new List<string>{ _ql.QuestionListCommon[0].answer1, _ql.QuestionListCommon[0].answer2, _ql.QuestionListCommon[0].answer3, _ql.QuestionListCommon[0].answer4, });
+        _ql = JsonUtility.FromJson<QuestionInJsonList>(File.ReadAllText(Path.Combine(Application.streamingAssetsPath, pathOnQuizList)));
+    }
+    void SetQuiz()
+    {
+        var rand = Random.Range(0, _answersButton.Count);
+        SetQuestion(_ql.QuestionList[rand].Question);
+        SetAnswers(new List<string>{ _ql.QuestionList[rand].answer1, _ql.QuestionList[rand].answer2, _ql.QuestionList[rand].answer3, _ql.QuestionList[rand].answer4});
+        _ql.QuestionList.RemoveAt(rand);
     }
     void SetQuestion(string text)
     {
@@ -55,5 +60,5 @@ class QuestionInJson
 [System.Serializable]
 class QuestionInJsonList
 {
-    public List<QuestionInJson> QuestionListCommon;
+    public List<QuestionInJson> QuestionList;
 }
